@@ -14,10 +14,10 @@ app.post('/register', (req, res) => {
   })
 })
 
-// app.get('/', (req, res) => {
-//   res.send('privet')
-//   console.log('hi')
-// })
+app.get('/', (req, res) => {
+  res.send('privet')
+  console.log('hi')
+})
 
 app.listen(process.env.PORT || port, (res, err) => {
   if (err) {
