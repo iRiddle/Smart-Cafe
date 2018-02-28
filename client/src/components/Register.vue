@@ -9,6 +9,16 @@
       </v-flex>
       <v-flex xs4 offset-xs4 mt-5>
         <v-card dark>
+        <v-flex xs-12>
+          <v-tabs fixed-tabs grow>
+            <v-tab>
+              Регистрация
+            </v-tab>
+            <v-tab>
+              Вход
+            </v-tab>
+          </v-tabs>
+        </v-flex>
           <v-flex xs12>
             <v-card-text class="headline mb-0">Создай аккаунт</v-card-text>
           </v-flex>
