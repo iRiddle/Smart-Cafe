@@ -1,28 +1,26 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const MongoClient = require('mongodb').MongoClient
+const db = require('./config/db')
 const morgan = require('morgan')
-const port = 3000
+const port = process.env.PORT || 3000
 const app = express()
+// const routes = require('./routes')(app)
 app.use(morgan('combined'))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
-
-app.post('/register', (req, res) => {
-  res.send({
-    message: `hello ${req.body.email}! Пользователь зареган с паролем ${req.body.password}`
-  })
-})
-
-app.get('/', (req, res) => {
-  res.send('privet')
-  console.log('hi')
-})
-
-app.listen(process.env.PORT || port, (res, err) => {
+MongoClient.connect(db.port, (err, database) => {
   if (err) {
-    console.log(err)
+    return console.log(err)
   } else {
-    console.log('сервер забущен на порту ' + port)
+    require('./routes')(app, database)
+    app.listen(port, (res, err) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('сервер забущен на порту ' + port)
+      }
+    })
   }
 })
