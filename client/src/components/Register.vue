@@ -8,64 +8,91 @@
         </v-card>
       </v-flex>
       <v-flex xs4 offset-xs4 mt-5>
-        <v-card dark>
-        <v-flex xs-12>
-          <v-tabs fixed-tabs grow>
-            <v-tab>
-              Регистрация
-            </v-tab>
-            <v-tab>
-              Вход
-            </v-tab>
-          </v-tabs>
-        </v-flex>
-          <v-flex xs12>
-            <v-card-text class="headline mb-0">Создай аккаунт</v-card-text>
+        <v-card dark height="400">
+          <v-flex xs-12>
+            <v-tabs grow v-model="tabs" slider-color="white">
+              <v-tab>
+                Регистрация
+              </v-tab>
+              <v-tab>
+                Вход
+              </v-tab>
+            </v-tabs>
           </v-flex>
-          <v-layout>
-            <v-flex xs-6 mx-5>
-              <v-text-field
-                name="first_name"
-                label="Имя*"
-                id="first_name">
-              </v-text-field>
-            </v-flex>
-            <v-flex xs-6 mx-5>
-              <v-text-field
-                name="second_name"
-                label="Фамилия*"
-                id="second_name">
-              </v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-flex xs-12 mx-5>
-            <v-text-field
-                name="email"
-                label="E-mail*"
-                id="email">
-            </v-text-field>
-          </v-flex>
-          <v-layout>
-            <v-flex xs-6 mx-5>
-              <v-text-field
-                name="first_name"
-                label="Пароль*"
-                type="password"
-                id="first_name">
-              </v-text-field>
-            </v-flex>
-            <v-flex xs-6 mx-5>
-              <v-text-field
-                name="second_name"
-                label="Подтвердить пароль*"
-                type="password"
-                id="second_name">
-              </v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-flex xs-6 pb-3>
-            <v-btn round class="blue white--text">Регистрация</v-btn>
-          </v-flex>
+          <v-tabs-items v-model="tabs">
+            <v-tab-item>
+              <v-flex xs12>
+                <v-card-text class="headline mb-0">Создай аккаунт</v-card-text>
+              </v-flex>
+              <v-layout>
+                <v-flex xs-6 mx-5>
+                  <v-text-field
+                    name="first_name"
+                    label="Имя*"
+                    id="first_name">
+                  </v-text-field>
+                </v-flex>
+                <v-flex xs-6 mx-5>
+                  <v-text-field
+                    name="second_name"
+                    label="Фамилия*"
+                    id="second_name">
+                  </v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                    name="email"
+                    label="E-mail*"
+                    id="email">
+                </v-text-field>
+              </v-flex>
+              <v-layout>
+                <v-flex xs-6 mx-5>
+                  <v-text-field
+                    name="first_name"
+                    label="Пароль*"
+                    type="password"
+                    id="first_name">
+                  </v-text-field>
+                </v-flex>
+                <v-flex xs-6 mx-5>
+                  <v-text-field
+                    name="second_name"
+                    label="Подтвердить пароль*"
+                    type="password"
+                    id="second_name">
+                  </v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-flex xs-6 mx-5>
+                <v-btn round class="blue white--text">Регистрация</v-btn>
+              </v-flex>
+            </v-tab-item>
+            <!-- вход -->
+            <v-tab-item>
+              <v-flex xs12>
+                <v-card-text class="headline mb-0">Войдите в свой аккаунт</v-card-text>
+              </v-flex>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                    name="email_enter"
+                    label="E-mail*"
+                    id="email_enter">
+                </v-text-field>
+              </v-flex>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                    name="password_enter"
+                    label="Пароль*"
+                    id="password_enter">
+                </v-text-field>
+              </v-flex>
+              <v-flex xs-6 mx-5>
+                <v-btn round class="blue white--text">Вход</v-btn>
+              </v-flex>
+            </v-tab-item>
+          </v-tabs-items>
         </v-card>
       </v-flex>
     </v-layout>
@@ -78,6 +105,7 @@ export default {
     return {
       email: 'E-mail',
       password: 'password',
+      tabs: null,
       rules: {
         required: (value) => !!value || 'Некорректный e-mail.',
         email: (value) => {
@@ -96,4 +124,5 @@ export default {
 
 </script>
 <style scoped>
+
 </style>
