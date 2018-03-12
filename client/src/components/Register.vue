@@ -27,16 +27,16 @@
               <v-layout>
                 <v-flex xs-6 mx-5>
                   <v-text-field
-                    name="first_name"
+                    name="firstName"
                     label="Имя*"
-                    id="first_name">
+                    id="firstName">
                   </v-text-field>
                 </v-flex>
                 <v-flex xs-6 mx-5>
                   <v-text-field
-                    name="second_name"
+                    name="secondName"
                     label="Фамилия*"
-                    id="second_name">
+                    id="secondName">
                   </v-text-field>
                 </v-flex>
               </v-layout>
@@ -50,18 +50,18 @@
               <v-layout>
                 <v-flex xs-6 mx-5>
                   <v-text-field
-                    name="first_name"
+                    name="password"
                     label="Пароль*"
                     type="password"
-                    id="first_name">
+                    id="password">
                   </v-text-field>
                 </v-flex>
                 <v-flex xs-6 mx-5>
                   <v-text-field
-                    name="second_name"
+                    name="password"
                     label="Подтвердить пароль*"
                     type="password"
-                    id="second_name">
+                    id="password">
                   </v-text-field>
                 </v-flex>
               </v-layout>

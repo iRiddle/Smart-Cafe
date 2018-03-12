@@ -1,14 +1,6 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcrypt')
 var UserSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true
-  },
-  secondName: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     unique: true
@@ -18,14 +10,24 @@ var UserSchema = new mongoose.Schema({
     required: true
   }
 })
+
+UserSchema.methods.encryptPassword = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+}
+
+UserSchema.methods.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.password)
+}
+
 var User = mongoose.model('User', UserSchema)
 module.exports = User
 
-module.exports.createUser = function (newUser, callback) {
-  bcrypt.genSalt(10, function (handleCallbackError, salt) {
-    bcrypt.hash(newUser.password, salt, function (handleCallbackError, hash) {
-      newUser.password = hash
-      newUser.save(callback)
-    })
-  })
-}
+// var createUser = function (newUser, callback) {
+//   bcrypt.genSalt(10, function (handleCallbackError, salt) {
+//     bcrypt.hash(newUser.password, salt, function (handleCallbackError, hash) {
+//       newUser.password = hash
+//       newUser.save(callback)
+//     })
+//   })
+// }
+// module.exports = createUser

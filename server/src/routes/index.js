@@ -1,7 +1,8 @@
 const express = require('express')
-//  const passport = require('passport')
+const passport = require('passport')
+const path = require('path')
 const router = express.Router()
-const User = require('../models/User')
+// const User = require('../models/User')
 
 router.get('/', (req, res) => {
   res.json({
@@ -11,30 +12,38 @@ router.get('/', (req, res) => {
 })
 
 router.get('/info', (req, res) => {
-  res.send('it me')
-  console.log('he')
+  res.sendFile(path.join(__dirname, '../../', 'public', 'login.html'))
+})
+
+router.get('/false', (req, res) => {
+  res.send('false')
 })
 // Не работает пост запрос на регистрацию
-router.post('/register', (req, res) => {
-  var firstName = req.body.firstName
-  var secondName = req.body.secondName
-  var email = req.body.email
-  var password = req.body.password
-  var newUser = new User({
-    firstName: firstName,
-    secondName: secondName,
-    email: email,
-    password: password
-  })
-  User.createUser(newUser, function (err, user) {
-    if (err) throw err
-    console.log(user)
-    res.send('suckass')
-  })
-  res.redirect('/users/login')
+router.get('/signup', (req, res) => {
+  res.render({user: req.user})
 })
-// router.get('/login', (req, res) => {
 
+router.post('/signup', passport.authenticate('local.signup', {
+  successRedirect: '/info',
+  failureRedirect: '/false',
+  failureFlash: true
+}))
+
+/// ///////////////////////////////////////////////////////
+
+// var newUser = new User({
+// firstName: req.body.firstName,
+// secondName: req.body.secondName,
+// email: req.body.email,
+// password: req.body.password
+// })
+// newUser.save(function (err, user) {
+// if (err) throw err
+// else console.log(user)
+// res.send('suckass')
+// })
+// res.redirect('/users/login')
+// router.get('/login', (req, res) => {
 // })
 
 module.exports = router
