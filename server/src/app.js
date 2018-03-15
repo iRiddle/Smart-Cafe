@@ -14,7 +14,7 @@ const routes = require('./routes/index')
 require('./config/passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-
+// подключить url //
 mongoose.connect('mongodb://localhost/smartCafe')
 
 app.use(morgan('combined'))
@@ -24,9 +24,10 @@ app.use(cookieParser())
 app.use(cors())
 app.use(session(
   {
-    secret: 'mysecretkey',
-    saveUninitialized: true,
-    resave: true,
+    secret: config.get('session:secret'),
+    saveUninitialized: config.get('session:saveUnitialized'),
+    resave: config.get('session:resave'),
+    cookie: config.get('session:cookie'),
     store: new MongoStore({mongooseConnection: mongoose.connection})
   }
 ))

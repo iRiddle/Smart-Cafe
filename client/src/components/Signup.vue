@@ -4,13 +4,13 @@
     <v-layout row wrap>
       <v-flex xs12>
         <v-card>
-          <v-card-text class="blue white--text display-1" >SmartCafe</v-card-text>
+          <v-card-text class="blue white--text display-1">SmartCafe</v-card-text>
         </v-card>
       </v-flex>
       <v-flex xs4 offset-xs4 mt-5>
-        <v-card dark height="400">
+        <v-card dark>
           <v-flex xs-12>
-            <v-tabs grow v-model="tabs" slider-color="white">
+            <v-tabs grow fixed-tabs v-model="tabs" slider-color="white">
               <v-tab>
                 Регистрация
               </v-tab>
@@ -25,18 +25,13 @@
                 <v-card-text class="headline mb-0">Создай аккаунт</v-card-text>
               </v-flex>
               <v-layout>
-                <v-flex xs-6 mx-5>
+                <v-flex xs-12 mx-5>
                   <v-text-field
-                    name="firstName"
+                    name="fullName"
                     label="Имя*"
-                    id="firstName">
-                  </v-text-field>
-                </v-flex>
-                <v-flex xs-6 mx-5>
-                  <v-text-field
-                    name="secondName"
-                    label="Фамилия*"
-                    id="secondName">
+                    v-model="fullName"
+                    :rules="[() => fullName.length > 0 || 'Это поле обязательно к заполнению']"
+                    id="fullName">
                   </v-text-field>
                 </v-flex>
               </v-layout>
@@ -44,29 +39,33 @@
                 <v-text-field
                     name="email"
                     label="E-mail*"
-                    id="email">
+                    v-model = "email"
+                    id="email"
+                    :rules="[rules.required, rules.email]">
                 </v-text-field>
               </v-flex>
-              <v-layout>
-                <v-flex xs-6 mx-5>
-                  <v-text-field
-                    name="password"
-                    label="Пароль*"
-                    type="password"
-                    id="password">
-                  </v-text-field>
-                </v-flex>
-                <v-flex xs-6 mx-5>
-                  <v-text-field
-                    name="password"
-                    label="Подтвердить пароль*"
-                    type="password"
-                    id="password">
-                  </v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-flex xs-6 mx-5>
-                <v-btn round class="blue white--text">Регистрация</v-btn>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                  name="password"
+                  label="Пароль*"
+                  v-model="password"
+                  :rules="[() => password.length > 0 || 'Это поле обязательно к заполнению']"
+                  type="password"
+                  id="password">
+                </v-text-field>
+              </v-flex>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                  name="confirmPassword"
+                  label="Подтвердить пароль*"
+                  type="password"
+                  v-model="confirmPassword"
+                  :rules="[comparePasswords]"
+                  id="confirmPassword">
+                </v-text-field>
+              </v-flex>
+              <v-flex mb-5>
+                <v-btn @click="signup">Регистрация</v-btn>
               </v-flex>
             </v-tab-item>
             <!-- вход -->
@@ -88,7 +87,7 @@
                     id="password_enter">
                 </v-text-field>
               </v-flex>
-              <v-flex xs-6 mx-5>
+              <v-flex xs-6>
                 <v-btn round class="blue white--text">Вход</v-btn>
               </v-flex>
             </v-tab-item>
@@ -100,11 +99,14 @@
   </v-app>
 </template>
 <script>
+import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
-      email: 'E-mail',
-      password: 'password',
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       tabs: null,
       rules: {
         required: (value) => !!value || 'Некорректный e-mail.',
@@ -116,12 +118,19 @@ export default {
     }
   },
   methods: {
-    selectEmail: function () {
-      this.email = ''
+    async signup () {
+      await AuthenticationService.signup({
+        email: this.email,
+        password: this.password
+      })
+    }
+  },
+  computed: {
+    comparePasswords () {
+      return this.password !== this.confirmPassword ? 'Пароль не совпадает' : ''
     }
   }
 }
-
 </script>
 <style scoped>
 

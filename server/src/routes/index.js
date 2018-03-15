@@ -18,14 +18,19 @@ router.get('/info', (req, res) => {
 router.get('/false', (req, res) => {
   res.send('false')
 })
-// Не работает пост запрос на регистрацию
 router.get('/signup', (req, res) => {
   res.render({user: req.user})
 })
 
 router.post('/signup', passport.authenticate('local.signup', {
   successRedirect: '/info',
-  failureRedirect: '/false',
+  failureRedirect: '/signup',
+  failureFlash: true
+}))
+
+router.post('/login', passport.authenticate('local.login', {
+  successRedirect: '/info',
+  failureRedirect: '/login',
   failureFlash: true
 }))
 
