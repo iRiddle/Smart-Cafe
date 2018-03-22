@@ -1,12 +1,6 @@
 <template>
-  <v-app>
   <v-container text-xs-center fluid px-0 py-0>
     <v-layout row wrap>
-      <v-flex xs12>
-        <v-card>
-          <v-card-text class="blue white--text display-1">SmartCafe</v-card-text>
-        </v-card>
-      </v-flex>
       <v-flex xs4 offset-xs4 mt-5>
         <v-card dark>
           <v-flex xs-12>
@@ -96,7 +90,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-  </v-app>
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
