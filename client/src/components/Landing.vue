@@ -1,19 +1,37 @@
 <template>
-  <div>
-    <v-flex class="text-xs-center">
-      <p class="white--text display-3 mt-5">
-        Начните улучшать свой бизнес уже сегодня
-      </p>
-      <p class="white--text display-1 mt-4">
-        SmartCafe - решение всех проблем малого бизнеса: <br>
-        учет товаров, контроль сотрудников, отчетность перед <br>
-        налоговой, аналитика вашего бизнеса
-      </p>
-    </v-flex>
-    <v-flex xs8 offset-xs2 mt-4>
-      <img src="" alt="">
-    </v-flex>
-    </div>
+  <container class="text-xs-center">
+    <v-layout row wrap>
+      <v-flex>
+        <p class="white--text display-3 mt-5">
+          Начните улучшать свой бизнес уже сегодня
+        </p>
+        <p class="white--text display-1 mt-4">
+          SmartCafe - решение всех проблем малого бизнеса: <br>
+          учет товаров, контроль сотрудников, отчетность перед <br>
+          налоговой, аналитика вашего бизнеса
+        </p>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs12 class="dashed-box">
+        <img src="/static/frame.png" class="pos" alt="">
+        <v-carousel hide-controls hide-delimiters class="border height green-box">
+          <v-carousel-item>
+            <img src="/static/data.png" alt="">
+          </v-carousel-item>
+          <v-carousel-item>
+            <img src="/static/data.png" alt="">
+          </v-carousel-item>
+          <v-carousel-item>
+            <img src="/static/data.png" alt="">
+          </v-carousel-item>
+          <v-carousel-item>
+            <img src="/static/data.png" alt="">
+          </v-carousel-item>
+        </v-carousel>
+      </v-flex>
+    </v-layout>
+  </container>
 </template>
 <script>
 export default {
@@ -31,16 +49,16 @@ export default {
       ],
       items: [
         {
-          src: '/static/sm.png'
+          src: '/static/data.png'
         },
         {
-          src: '/static/sm.png'
+          src: '/static/data.png'
         },
         {
-          src: '/static/sm.png'
+          src: '/static/data.png'
         },
         {
-          src: '/static/sm.png'
+          src: '/static/data.png'
         }
       ]
     }
@@ -49,18 +67,43 @@ export default {
 </script>
 
 <style scoped>
+  .dashed-box {
+    z-index: 1;
+  }
+  .green-box {
+    position: absolute;
+    z-index: 2;
+    top: 37%;
+    left: -0.75%;
+    height: auto;
+    max-width: 100%;
+  }
+  .pos{
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    z-index: 3;
+  }
   .mt-5{
     margin-top: 120px !important
   }
-  .height{
-    height: 100vh;
-  }
-  .item{
-    height: auto;
-    max-width: 100%
-  }
   .border{
     box-shadow: none !important
+  }
+  .pos{
+    position: relative;
+  }
+  @media screen and (max-width: 1124px){
+    .green-box{
+      /* position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: -0.75%;
+      height: auto;
+      max-width: 100%; */
+      top: 43.5%;
+      left: -0.9%;
+    }
   }
 </style>
 

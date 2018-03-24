@@ -3,7 +3,9 @@
   <v-jumbotron src="/static/back2.png" height="1172px">
   <v-navigation-drawer clipped disable-resize-watcher app v-model="sideNav">
     <v-list>
-      <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
+      <v-list-tile v-for="item in menuItems"
+      :key="item.title"
+      :to="item.link">
         <v-list-tile-action>
         </v-list-tile-action>
         <v-list-tile-content>
@@ -37,7 +39,6 @@
     <router-view></router-view>
   </main>
   </v-jumbotron>
-  <v-footer app></v-footer>
 </v-app>
 </template>
 

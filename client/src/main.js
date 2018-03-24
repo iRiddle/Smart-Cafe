@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import './assets/stylus/main.styl'
 import colors from 'vuetify/es5/util/colors'
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
