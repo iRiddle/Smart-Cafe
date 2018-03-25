@@ -1,34 +1,26 @@
 <template>
-  <v-container text-xs-center fluid px-0 py-0>
+  <v-container text-xs-center>
     <v-layout row wrap>
-      <v-flex xs4 offset-xs4 mt-5>
-        <v-card dark>
-          <v-flex xs-12>
-            <v-tabs grow fixed-tabs v-model="tabs" slider-color="white">
-              <v-tab>
-                Регистрация
-              </v-tab>
-              <v-tab>
-                Вход
-              </v-tab>
-            </v-tabs>
-          </v-flex>
-          <v-tabs-items v-model="tabs">
-            <v-tab-item>
+      <v-flex xs6 offset-xs3 mt-5>
+        <v-card>
+          <v-container>
+            <v-layout row>
               <v-flex xs12>
                 <v-card-text class="headline mb-0">Создай аккаунт</v-card-text>
               </v-flex>
-              <v-layout>
-                <v-flex xs-12 mx-5>
-                  <v-text-field
-                    name="fullName"
-                    label="Имя*"
-                    v-model="fullName"
-                    :rules="[() => fullName.length > 0 || 'Это поле обязательно к заполнению']"
-                    id="fullName">
-                  </v-text-field>
-                </v-flex>
-              </v-layout>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs-12 mx-5>
+                <v-text-field
+                  name="fullName"
+                  label="Имя*"
+                  v-model="fullName"
+                  :rules="[() => fullName.length > 0 || 'Это поле обязательно к заполнению']"
+                  id="fullName">
+                </v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
               <v-flex xs-12 mx-5>
                 <v-text-field
                     name="email"
@@ -38,6 +30,8 @@
                     :rules="[rules.required, rules.email]">
                 </v-text-field>
               </v-flex>
+            </v-layout>
+            <v-layout row>
               <v-flex xs-12 mx-5>
                 <v-text-field
                   name="password"
@@ -48,6 +42,8 @@
                   id="password">
                 </v-text-field>
               </v-flex>
+            </v-layout>
+            <v-layout row>
               <v-flex xs-12 mx-5>
                 <v-text-field
                   name="confirmPassword"
@@ -58,34 +54,13 @@
                   id="confirmPassword">
                 </v-text-field>
               </v-flex>
+            </v-layout>
+            <v-layout row>
               <v-flex mb-5>
                 <v-btn @click="signup">Регистрация</v-btn>
               </v-flex>
-            </v-tab-item>
-            <!-- вход -->
-            <v-tab-item>
-              <v-flex xs12>
-                <v-card-text class="headline mb-0">Войдите в свой аккаунт</v-card-text>
-              </v-flex>
-              <v-flex xs-12 mx-5>
-                <v-text-field
-                    name="email_enter"
-                    label="E-mail*"
-                    id="email_enter">
-                </v-text-field>
-              </v-flex>
-              <v-flex xs-12 mx-5>
-                <v-text-field
-                    name="password_enter"
-                    label="Пароль*"
-                    id="password_enter">
-                </v-text-field>
-              </v-flex>
-              <v-flex xs-6>
-                <v-btn round class="blue white--text">Вход</v-btn>
-              </v-flex>
-            </v-tab-item>
-          </v-tabs-items>
+            </v-layout>
+          </v-container>
         </v-card>
       </v-flex>
     </v-layout>
