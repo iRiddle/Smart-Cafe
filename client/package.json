@@ -18,7 +18,9 @@
     "vue": "^2.5.16",
     "vue-carousel": "^0.6.9",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.8"
+    "vuetify": "^1.0.8",
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.6",

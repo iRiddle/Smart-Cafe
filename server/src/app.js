@@ -11,9 +11,7 @@ const config = require('./config')
 const app = express()
 const passport = require('passport')
 const routes = require('./routes/index')
-require('./config/passport')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+require('./controllers/UserController')
 // подключить url //
 mongoose.connect('mongodb://localhost/smartCafe')
 
@@ -22,15 +20,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(cors())
-app.use(session(
-  {
-    secret: config.get('session:secret'),
-    saveUninitialized: config.get('session:saveUnitialized'),
-    resave: config.get('session:resave'),
-    cookie: config.get('session:cookie'),
-    store: new MongoStore({mongooseConnection: mongoose.connection})
-  }
-))
 
 app.use(passport.initialize())
 app.use(passport.session())

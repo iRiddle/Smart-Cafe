@@ -1,4 +1,7 @@
 <template>
+  <div>
+  <Toolbar></Toolbar>
+  <NavigationDrawer></NavigationDrawer>
   <container class="text-xs-center">
     <v-layout row wrap>
       <v-flex>
@@ -32,19 +35,19 @@
       </v-flex>
     </v-layout>
   </container>
+  </div>
 </template>
 <script>
+import Toolbar from '@/components/Toolbar.vue'
 export default {
   data () {
     return {
-      message: 'Напас Лэндос',
-      gradient: 'to top, #7B1FA2, #E1BEE7',
       sideNav: false,
       menuItems: [
         { title: 'Главная', link: '/main' },
         { title: 'Преимущества', link: '/advantages' },
         { title: 'Цены', link: '/price' },
-        { title: 'Контакты', link: '/contacts' },
+        { title: 'Регистрация', link: '/signup' },
         { title: 'Войти', link: '/signin' }
       ],
       items: [
@@ -62,18 +65,24 @@ export default {
         }
       ]
     }
+  },
+  components: {
+    Toolbar
   }
 }
 </script>
 
 <style scoped>
+  .lend{
+    background: none !important
+  }
   .dashed-box {
     z-index: 1;
   }
   .green-box {
     position: absolute;
     z-index: 2;
-    top: 37%;
+    top: 38.5%;
     left: -0.75%;
     height: auto;
     max-width: 100%;

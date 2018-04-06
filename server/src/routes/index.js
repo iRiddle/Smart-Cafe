@@ -1,6 +1,5 @@
 const express = require('express')
-const passport = require('passport')
-const path = require('path')
+const UserController = require('../controllers/UserController')
 const router = express.Router()
 // const User = require('../models/User')
 
@@ -11,28 +10,8 @@ router.get('/', (req, res) => {
   console.log('he')
 })
 
-router.get('/info', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../', 'public', 'login.html'))
-})
-
-router.get('/false', (req, res) => {
-  res.send('false')
-})
-router.get('/signup', (req, res) => {
-  res.render({user: req.user})
-})
-
-router.post('/signup', passport.authenticate('local.signup', {
-  successRedirect: '/info',
-  failureRedirect: '/signup',
-  failureFlash: true
-}))
-
-router.post('/login', passport.authenticate('local.login', {
-  successRedirect: '/info',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
+router.post('/register', UserController.register)
+router.post('/login', UserController.login)
 
 /// ///////////////////////////////////////////////////////
 
@@ -64,3 +43,15 @@ module.exports = router
 //     console.log('hi')
 //   })
 // }
+
+//  router.post('/signup', passport.authenticate('local.signup', {
+//   successRedirect: '/info',
+//   failureRedirect: '/signup',
+//   failureFlash: true
+// }))
+
+// router.post('/login', passport.authenticate('local.login', {
+//   successRedirect: '/info',
+//   failureRedirect: '/login',
+//   failureFlash: true
+// }))

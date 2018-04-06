@@ -4,11 +4,9 @@
   "session": {
     "secret": "mySecretKey",
     "saveUnitialized": true,
-    "resave": true,
-    "cookie": {
-      "path": "/",
-      "httpOnly": true,
-      "maxAge": null
-    }
+    "resave": true
+  },
+  "authentication": { 
+    "jwtSecret": "process.env.JWT_SECRET || 'secret'"
   }
 }

@@ -1,32 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Signup from '@/components/Signup'
-import Signin from '@/components/Signin'
-import Main from '@/components/Main'
 import Landing from '@/components/Landing'
+import Main from '@/components/Main'
+import Login from '@/components/Login'
+import App from '@/components/App/Hello'
+import Signup from '@/components/Signup'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Landing',
+      name: 'landing',
       component: Landing
     },
     {
+      path: '/main',
+      name: 'main',
+      component: Main
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
       path: '/signup',
-      name: 'Signup',
+      name: 'signup',
       component: Signup
     },
     {
-      path: '/signin',
-      name: 'Signin',
-      component: Signin
-    },
-    {
-      path: '/main',
-      name: 'Main',
-      component: Main
+      path: '/app/main',
+      name: 'app',
+      component: App
     }
   ]
 })

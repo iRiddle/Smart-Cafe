@@ -2,8 +2,16 @@
   <v-container>
       <v-layout>
           <v-flex>
-              <p>Hello user</p>
+              Hello user
           </v-flex>
       </v-layout>
   </v-container>
 </template>
+
+<script>
+export default {
+}
+</script>
+
+<style>
+</style>

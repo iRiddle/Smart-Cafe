@@ -1,4 +1,6 @@
 <template>
+<div>
+  <Toolbar></Toolbar>
   <v-container text-xs-center>
     <v-layout row wrap>
       <v-flex xs6 offset-xs3 mt-5>
@@ -12,11 +14,11 @@
             <v-layout row>
               <v-flex xs-12 mx-5>
                 <v-text-field
-                  name="fullName"
+                  name="name"
                   label="Имя*"
-                  v-model="fullName"
+                  v-model = "name"
                   :rules="[() => fullName.length > 0 || 'Это поле обязательно к заполнению']"
-                  id="fullName">
+                  id="name">
                 </v-text-field>
               </v-flex>
             </v-layout>
@@ -56,7 +58,7 @@
               </v-flex>
             </v-layout>
             <v-layout row>
-              <v-flex mb-5>
+              <v-flex mb-3>
                 <v-btn @click="signup">Регистрация</v-btn>
               </v-flex>
             </v-layout>
@@ -65,13 +67,15 @@
       </v-flex>
     </v-layout>
   </v-container>
+</div>
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Toolbar from '@/components/Toolbar'
 export default {
   data () {
     return {
-      fullName: '',
+      name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -85,12 +89,25 @@ export default {
       }
     }
   },
+  components: {
+    Toolbar
+  },
   methods: {
     async signup () {
-      await AuthenticationService.signup({
-        email: this.email,
-        password: this.password
-      })
+      try {
+        const respone = await AuthenticationService.signup({
+          email: this.email,
+          password: this.password,
+          name: this.name
+        })
+        this.$store.dispatch('setToken', respone.data.toket)
+        this.$store.dispatch('setUser', respone.data.user)
+        this.$router.push({
+          name: 'app'
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   },
   computed: {
@@ -101,5 +118,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>

@@ -1,4 +1,6 @@
 <template>
+<div>
+  <Toolbar></Toolbar>
   <v-container text-xs-center>
     <v-layout row wrap>
       <v-flex xs6 offset-xs3 mt-5>
@@ -12,18 +14,22 @@
           <v-layout row>
             <v-flex xs12 mx-5>
               <v-text-field
-                name="email_enter"
+                name="email"
                 label="E-mail*"
-                id="email_enter">
+                v-model="email"
+                id="email"
+                prepend-icon="email">
               </v-text-field>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 mx-5>
               <v-text-field
-                name="password_enter"
+                name="password"
                 label="Пароль*"
-                id="password_enter">
+                v-model="password"
+                id="password"
+                prepend-icon="lock">
               </v-text-field>
             </v-flex>
           </v-layout>
@@ -33,7 +39,7 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 mx-5>
-              <v-btn block>Войти</v-btn>
+              <v-btn block @click="login">Войти</v-btn>
             </v-flex>
           </v-layout>
           <v-layout>
@@ -49,13 +55,39 @@
       </v-flex>
     </v-layout>
   </v-container>
+</div>
 </template>
 
 <script>
+import AuthenticationService from '@/services/AuthenticationService'
+import Toolbar from '@/components/Toolbar.vue'
 export default{
   data () {
     return {
-      name: 'Erg'
+      email: '',
+      password: '',
+      error: null,
+      sideNav: false
+    }
+  },
+  components: {
+    Toolbar
+  },
+  methods: {
+    async login () {
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({
+          name: 'app'
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }

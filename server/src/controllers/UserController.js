@@ -1,27 +1,118 @@
-var express = require('express')
-var router = express.Router()
-var bodyParser = require('body-parser')
+var passport = require('passport')
+const jwt = require('jsonwebtoken')
+const config = require('../config')
 var User = require('../models/User')
 
-router.use(bodyParser.urlencoded({extended: true}))
-router.use(bodyParser.json())
-
-router.post('/register', (req, res) => {
-  User.create({
-    firstName: req.body.firstName,
-    secondName: req.body.secondName,
-    email: req.body.email,
-    password: req.body.password
-  },
-  function (err, user) {
-    // if (err) return res.status(500)
-    if (err) return res.status(500).send('There was a problem adding the information to the database.')
-    res.status(200).send(user)
-    // res.status(200).send(user)
-    // res.send({
-    //   message: `hello ${req.body.email}! Пользователь зареган с паролем ${req.body.password}`
-    // })
-  }
-  )
+passport.serializeUser(function (user, done) {
+  done(null, user.id)
 })
-module.exports = router
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user)
+  })
+})
+function jwtSignUser (user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
+}
+module.exports = {
+  async register (req, res) {
+    try {
+      const user = await User.create(req.body)
+      const userJson = user.toJSON()
+      res.send({
+        user: userJson,
+        token: jwtSignUser(userJson)
+      })
+    } catch (err) {
+      res.status(400).send({
+        error: 'Мэйл уже используется'
+      })
+    }
+  },
+  async login (req, res) {
+    try {
+      const {email, password} = req.body
+      const user = await User.findOne({
+        where: {
+          email: email
+        }
+      })
+
+      if (!user) {
+        return res.status(403).send({
+          error: 'Логин информация была некорректна'
+        })
+      }
+
+      const isPasswordValid = await user.validPassword(password)
+      if (!isPasswordValid) {
+        return res.status(403).send({
+          error: 'Логин некорректен'
+        })
+      }
+
+      const userJson = user.toJSON()
+      res.send({
+        user: userJson,
+        token: jwtSignUser(userJson)
+      })
+    } catch (err) {
+      res.status(500).send({
+        error: 'Произошла ошибка при входе'
+      })
+    }
+  }
+}
+
+// passport.use('local.signup', new LocalStrategy({
+//   usernameField: 'email',
+//   passwordField: 'password',
+//   nameField: 'name',
+//   passReqToCallback: true
+// },
+// function (req, email, password, done) {
+//   User.findOne({'email': email}, function (err, user) {
+//     if (err) {
+//       return done(err)
+//     }
+//     if (user) {
+//       return done(null, false)
+//     }
+//     var newUser = new User()
+//     newUser.email = req.body.email
+//     newUser.password = newUser.encryptPassword(req.body.password)
+//     newUser.name = req.body.name
+//     newUser.save(function (err) {
+//       if (err) {
+//         return done(err)
+//       }
+//       return done(null, newUser)
+//     })
+//   })
+// }))
+
+// passport.use('local.login', new LocalStrategy({
+//   usernameField: 'email',
+//   passwordField: 'password',
+//   passReqToCallback: true
+// },
+// function (req, email, password, done) {
+//   User.findOne({ 'email': email }, function (err, user) {
+//     if (err) {
+//       return done(err)
+//     }
+//     if (!user) {
+//       return done(null, false, { message: 'Incorrect username.' })
+//     }
+//     if (!user.validPassword(password)) {
+//       return done(null, false, { message: 'Incorrect password.' })
+//     }
+//     console.log('зашел ' + user)
+//     return done(null, user)
+//   })
+// }
+// ))
