@@ -29,10 +29,5 @@ export default new Vuex.Store({
     setUser ({ commit }, user) {
       commit('SET_USER', user)
     }
-  },
-  getters: {
-    layout (state) {
-      return state.layout
-    }
   }
 })

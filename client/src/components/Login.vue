@@ -1,5 +1,6 @@
 <template>
 <div>
+  <v-jumbotron src="/static/back2.png" height="1172px">
   <Toolbar></Toolbar>
   <v-container text-xs-center>
     <v-layout row wrap>
@@ -27,6 +28,7 @@
               <v-text-field
                 name="password"
                 label="Пароль*"
+                type="password"
                 v-model="password"
                 id="password"
                 prepend-icon="lock">
@@ -39,22 +41,26 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 mx-5>
-              <v-btn block @click="login">Войти</v-btn>
+              <v-btn block @click="login"
+              :disabled = "email.length === 0 || password.length === 0"
+              >Войти</v-btn>
             </v-flex>
           </v-layout>
           <v-layout>
-              <v-flex mt-3 xs12>
-                Нет аккаунта?
-                <router-link to="/signup" tag="span" style="cursor: pointer" class="blue--text">
-                  Регистрируйся
-                </router-link>
-              </v-flex>
+            <v-flex mt-3 xs12>
+              Нет аккаунта?
+              <router-link to="/signup" tag="span" style="cursor: pointer" class="blue--text">
+                Регистрируйся
+              </router-link>
+            </v-flex>
           </v-layout>
+        <v-progress-circular v-if="isClicked" indeterminate color="primary"></v-progress-circular>
         </v-container>
         </v-card>
       </v-flex>
     </v-layout>
   </v-container>
+  </v-jumbotron>
 </div>
 </template>
 
@@ -67,7 +73,8 @@ export default{
       email: '',
       password: '',
       error: null,
-      sideNav: false
+      sideNav: false,
+      isClicked: false
     }
   },
   components: {
@@ -76,6 +83,7 @@ export default{
   methods: {
     async login () {
       try {
+        this.isClicked = true
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
@@ -83,7 +91,7 @@ export default{
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
-          name: 'app'
+          name: 'analytics'
         })
       } catch (error) {
         this.error = error.response.data.error

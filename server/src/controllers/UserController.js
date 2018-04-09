@@ -1,17 +1,17 @@
-var passport = require('passport')
+// var passport = require('passport')
 const jwt = require('jsonwebtoken')
-const config = require('../config')
+const config = require('../config/config')
 var User = require('../models/User')
 
-passport.serializeUser(function (user, done) {
-  done(null, user.id)
-})
+// passport.serializeUser(function (user, done) {
+//   done(null, user.id)
+// })
 
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user)
-  })
-})
+// passport.deserializeUser(function (id, done) {
+//   User.findById(id, function (err, user) {
+//     done(err, user)
+//   })
+// })
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
   return jwt.sign(user, config.authentication.jwtSecret, {
@@ -35,21 +35,18 @@ module.exports = {
   },
   async login (req, res) {
     try {
-      const {email, password} = req.body
-      const user = await User.findOne({
-        where: {
-          email: email
-        }
-      })
+      const {
+        email,
+        password
+      } = req.body
+      const user = await User.findOne({email: email})
 
       if (!user) {
         return res.status(403).send({
           error: 'Логин информация была некорректна'
         })
       }
-
-      const isPasswordValid = await user.validPassword(password)
-      if (!isPasswordValid) {
+      if (!await user.passwordIsValid(password)) {
         return res.status(403).send({
           error: 'Логин некорректен'
         })

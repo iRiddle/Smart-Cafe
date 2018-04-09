@@ -7,7 +7,7 @@ const morgan = require('morgan')
 const port = process.env.PORT || 3000
 const mongoose = require('mongoose')
 const users = require('./models/User')
-const config = require('./config')
+const config = require('./config/config')
 const app = express()
 const passport = require('passport')
 const routes = require('./routes/index')
@@ -31,6 +31,7 @@ app.listen(port, (res, err) => {
   if (err) {
     console.log('Error')
   } else {
-    console.log('сервер запущен на порту ' + config.get('port'))
+    console.log(config.authentication.jwtSecret)
+    console.log('сервер запущен на порту ' + config.port)
   }
 })

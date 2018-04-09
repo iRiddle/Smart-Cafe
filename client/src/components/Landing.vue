@@ -1,5 +1,6 @@
 <template>
   <div>
+  <v-jumbotron src="/static/back2.png" height="1172px">
   <Toolbar></Toolbar>
   <NavigationDrawer></NavigationDrawer>
   <container class="text-xs-center">
@@ -35,6 +36,7 @@
       </v-flex>
     </v-layout>
   </container>
+  </v-jumbotron>
   </div>
 </template>
 <script>

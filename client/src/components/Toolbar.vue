@@ -60,7 +60,7 @@ export default {
         { icon: 'face', title: 'Главная', link: '/main' },
         { icon: 'face', title: 'Преимущества', link: '/advantages' },
         { icon: 'face', title: 'Цены', link: '/price' },
-        { icon: 'face', title: 'Регистрация', link: '/signup' },
+        { icon: 'face', title: 'Регистрация', link: '/register' },
         { icon: 'face', title: 'Войти', link: '/login' }
       ]
       return menuItems

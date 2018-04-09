@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/components/Landing'
-import Main from '@/components/Main'
+import Analytics from '@/components/App/Analytics'
 import Login from '@/components/Login'
-import App from '@/components/App/Hello'
-import Signup from '@/components/Signup'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
@@ -16,24 +15,19 @@ export default new Router({
       component: Landing
     },
     {
-      path: '/main',
-      name: 'main',
-      component: Main
-    },
-    {
       path: '/login',
       name: 'login',
       component: Login
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: Signup
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/app/main',
-      name: 'app',
-      component: App
+      name: 'analytics',
+      component: Analytics
     }
   ]
 })

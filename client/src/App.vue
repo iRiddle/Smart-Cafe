@@ -1,15 +1,11 @@
 <template>
-<div id = "app">
     <v-app>
       <main>
-        <v-jumbotron src="/static/back2.png" height="1172px">
-          <v-container fluid>
-              <router-view></router-view>
-          </v-container>
-        </v-jumbotron>
+        <v-container fluid py-0 px-0>
+          <router-view></router-view>
+        </v-container>
       </main>
     </v-app>
-</div>
 </template>
 
 <script>

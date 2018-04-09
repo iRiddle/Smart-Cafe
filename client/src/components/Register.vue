@@ -1,5 +1,6 @@
 <template>
 <div>
+  <v-jumbotron src="/static/back2.png" height="1172px">
   <Toolbar></Toolbar>
   <v-container text-xs-center>
     <v-layout row wrap>
@@ -59,7 +60,7 @@
             </v-layout>
             <v-layout row>
               <v-flex mb-3>
-                <v-btn @click="signup">Регистрация</v-btn>
+                <v-btn @click="register">Регистрация</v-btn>
               </v-flex>
             </v-layout>
           </v-container>
@@ -67,6 +68,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+  </v-jumbotron>
 </div>
 </template>
 <script>
@@ -93,9 +95,9 @@ export default {
     Toolbar
   },
   methods: {
-    async signup () {
+    async register () {
       try {
-        const respone = await AuthenticationService.signup({
+        const respone = await AuthenticationService.register({
           email: this.email,
           password: this.password,
           name: this.name
