@@ -39,7 +39,7 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-xs-only">
-        <v-btn class = "white--text" flat @click="logout">Выйти</v-btn>
+        <v-btn flat @click="logout">Выйти</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </div>
@@ -56,21 +56,18 @@ export default {
   computed: {
     menuItems () {
       let menuItems = [
-        { icon: 'face', title: 'Статистика', link: '/main' },
-        { icon: 'account_box', title: 'Сотрудники', link: '/advantages' },
-        { icon: 'restaurant_menu', title: 'Меню', link: '/price' },
-        { icon: 'store', title: 'Склад', link: '/register' },
-        { icon: 'credit_card', title: 'Товары', link: '/login' },
-        { icon: 'book', title: 'Заказы', link: '/login' }
+        { icon: 'face', title: 'Статистика', link: '/app/main' },
+        { icon: 'account_box', title: 'Сотрудники', link: '/app/employers' },
+        { icon: 'restaurant_menu', title: 'Меню', link: '/app/menu' },
+        { icon: 'store', title: 'Склад', link: '/app/store' },
+        { icon: 'credit_card', title: 'Товары', link: '/app/products' },
+        { icon: 'book', title: 'Заказы', link: '/app/orders' }
       ]
       return menuItems
     },
     fullName: {
       get: function () {
         return this.$store.state.user.name
-      },
-      set: function (newValue) {
-        this.userName = this.$state.state.user.name
       }
     }
   },

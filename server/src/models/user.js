@@ -15,7 +15,8 @@ var UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  employers: []
 })
 
 UserSchema.pre('save', async function (next) {

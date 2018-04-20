@@ -105,7 +105,7 @@ export default {
         this.$store.dispatch('setToken', respone.data.toket)
         this.$store.dispatch('setUser', respone.data.user)
         this.$router.push({
-          name: 'app'
+          name: 'analytics'
         })
       } catch (error) {
         this.error = error.response.data.error
