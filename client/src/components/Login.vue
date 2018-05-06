@@ -49,7 +49,7 @@
           <v-layout>
             <v-flex mt-3 xs12>
               Нет аккаунта?
-              <router-link to="/signup" tag="span" style="cursor: pointer" class="blue--text">
+              <router-link to="/register" tag="span" style="cursor: pointer" class="blue--text">
                 Регистрируйся
               </router-link>
             </v-flex>

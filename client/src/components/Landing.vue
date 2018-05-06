@@ -37,6 +37,105 @@
     </v-layout>
   </container>
   </v-jumbotron>
+  <container>
+    <v-layout>
+      <v-flex xs6 mt-5 offset-xs2>
+        <div class="round">
+          <img src="../assets/icons/house.png" alt="house" class="position_img">
+        </div>
+        <div class="display-1 text_description">
+          Ориентировано <br>
+          на малый бизнес
+        </div>
+        <p class="mt-3 subheading">
+          Система создана <br>
+          для малого бизнеса, <br>
+          что значительно ускоряет и упрощает <br>
+          работу с ней
+        </p>
+      </v-flex>
+      <v-flex xs6 mt-5>
+        <img src="../assets/pictures/cafe.png" alt="cafe">
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs6 mt-5 offset-xs2>
+        <img src="../assets/pictures/smartphone.png" alt="smartphone">
+      </v-flex>
+      <v-flex xs6 mt-5>
+        <div class="round">
+          <img src="../assets/icons/cloud.png" alt="cloud" class="position_img">
+        </div>
+        <div class="display-1 text_description">
+          Все данные в облаке
+        </div>
+        <p class="mt-3 subheading">
+          Вы можете управлять вашим <br>
+          бизнесом в любое время из любой, <br>
+          точки мира
+        </p>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs6 mt-5 offset-xs2>
+        <div class="round">
+          <img src="../assets/icons/bank.png" alt="bank" class="position_img">
+        </div>
+        <div class="display-1 text_description">
+          Доступная цена
+        </div>
+        <p class="mt-3 subheading">
+          Цена теперь не является преградой. <br>
+          Заведения любых масштабов <br>
+          сможет позволить себе SmartCafe
+        </p>
+      </v-flex>
+      <v-flex xs6 mt-5 mb-5>
+        <img src="../assets/pictures/tablet.png" alt="cafe">
+      </v-flex>
+    </v-layout>
+  </container>
+  <hr class="mb-5">
+  <container>
+    <v-layout>
+      <v-flex offset-xs2>
+        <v-card class="card_settings">
+          <v-card-media src="/static/card_PC.png" height="200px">
+          </v-card-media>
+          <v-card-title primary-title>
+            <div>
+              <h3 class="headline mb-0">Просто для сотрудника</h3>
+              <div>система проста в освоении и <br>быстра в использовании<br>подробнее...</div>
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+      <v-flex>
+        <v-card class="card_settings">
+          <v-card-media src="/static/card_PC.png" height="200px">
+          </v-card-media>
+          <v-card-title primary-title>
+            <div>
+              <h3 class="headline mb-0">Удобно для руководителя</h3>
+              <div>огромные возможности для<br> контроля и улучшение бизнеса<br>подробнее...</div>
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+      <v-flex>
+        <v-card class="card_settings">
+          <v-card-media src="/static/card_PC.png" height="200px">
+          </v-card-media>
+          <v-card-title primary-title>
+            <div>
+              <h3 class="headline mb-0">Законно для ФНС</h3>
+              <div>печать чеков<br>и соответствие 54-ФЗ<br>подробнее...</div>
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+  </v-layout>
+  </container>
   </div>
 </template>
 <script>
@@ -95,6 +194,9 @@ export default {
     height: auto;
     z-index: 3;
   }
+  .text_description {
+    margin-top: 50px;
+  }
   .mt-5{
     margin-top: 120px !important
   }
@@ -116,69 +218,22 @@ export default {
       left: -0.9%;
     }
   }
+  .round {
+    display: inline-block;
+    width: 74px;
+    height: 74px;
+    background-color: white;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    text-align: center;
+    box-shadow: -8px 5px 30px -9px #000000;
+  }
+  .position_img {
+    padding-top: 14px
+  }
+  .card_settings {
+    border-radius: 22px;
+    height: 320px;
+    width: 310px
+  }
 </style>
-
-<!-- <v-app>
-  <v-toolbar app flat>
-    <v-toolbar-title>SmartCafe</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-btn flat>Главная</v-btn>
-      <v-btn flat>Преимущества</v-btn>
-      <v-btn flat>Цены</v-btn>
-      <v-btn flat>Контакты</v-btn>
-      <v-btn flat>Войти</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
-  <v-content>
-    <v-container fluid>
-      <router-view>
-      </router-view>
-    </v-container>
-  </v-content>
-  <v-footer app>
-  </v-footer>
-</v-app> -->
-
-<!--<v-jumbotron src="/static/back2.png" height="1172px">
-  <v-navigation-drawer app></v-navigation-drawer>
-    <v-toolbar flat>
-      <v-toolbar-title class="white--text">SmartCafe</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn
-          class = "white--text"
-          flat
-          v-for="item in menuItems"
-          :key="item.title"
-          :to="item.link">
-          {{ item.title }}
-        </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-    <v-flex class="text-xs-center">
-      <p class="white--text display-3 mt-5">
-        Начните улучшать свой бизнес уже сегодня
-      </p>
-      <p class="white--text display-1 mt-4">
-        SmartCafe - решение всех проблем малого бизнеса: <br>
-        учет товаров, контроль сотрудников, отчетность перед <br>
-        налоговой, аналитика вашего бизнеса
-      </p>
-    </v-flex>
-    <v-flex xs8 offset-xs2>
-      <v-carousel hide-controls hide-delimiters class="height border" value=0>
-        <v-carousel-item v-for="(item,i) in items" :src="item.src" :key="i" class="height">
-        </v-carousel-item>
-      </v-carousel>
-    </v-flex>
-  </v-jumbotron>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>
-  <p>dasdasds</p>-->

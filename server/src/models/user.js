@@ -16,7 +16,8 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  employers: []
+  employers: [],
+  categories: []
 })
 
 UserSchema.pre('save', async function (next) {
@@ -42,13 +43,3 @@ UserSchema.methods.passwordIsValid = function (password) {
 
 var User = mongoose.model('User', UserSchema)
 module.exports = User
-
-// var createUser = function (newUser, callback) {
-//   bcrypt.genSalt(10, function (handleCallbackError, salt) {
-//     bcrypt.hash(newUser.password, salt, function (handleCallbackError, hash) {
-//       newUser.password = hash
-//       newUser.save(callback)
-//     })
-//   })
-// }
-// module.exports = createUser

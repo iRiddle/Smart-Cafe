@@ -39,7 +39,7 @@
                         </v-text-field>
                       <v-date-picker v-model="editedItem.date" no-title scrollable>
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="editedIte.menu = false">Cancel</v-btn>
+                        <v-btn flat color="primary" @click="editedItem.menu = false">Cancel</v-btn>
                         <v-btn flat color="primary" @click="$refs.menu.save(editedItem.date)">OK</v-btn>
                       </v-date-picker>
                     </v-menu>
@@ -86,7 +86,7 @@
         </v-data-table>
       </v-flex>
     </v-layout>
-    <v-layout row >
+    <v-layout row>
       <v-flex xs10 offset-xs11 mt-3>
         <v-btn fab dark slot='activator' @click.stop="dialog = true" color="indigo">
           <v-icon dark>add</v-icon>
@@ -122,13 +122,6 @@ export default {
         access_an: false,
         date: null
       }
-      // defaultItem: {
-      //   name: '',
-      //   password: '',
-      //   access_me: false,
-      //   access_an: false,
-      //   date: new Date().toDateString()
-      // }
     }
   },
   computed: {
